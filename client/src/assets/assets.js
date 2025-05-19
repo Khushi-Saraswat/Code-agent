@@ -309,6 +309,13 @@ export const dashboardDummyData = {
   bookings: userBookingsDummyData,
 };
 
+export const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "Hotels", path: "/rooms" },
+  { name: "Experience", path: "/" },
+  { name: "About", path: "/" },
+];
+
 // --------- SVG code for Book Icon------
 /* 
 const BookIcon = ()=>(
