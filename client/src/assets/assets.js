@@ -319,7 +319,7 @@ export const navLinks = [
 export const roomTypes = [
   "Single Bed",
   "Double Bed",
-  "Luxuty Room",
+  "Luxury Room",
   "Family Suit",
 ];
 
