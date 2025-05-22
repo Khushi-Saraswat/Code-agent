@@ -71,7 +71,7 @@ const MyBookings = () => {
                   className={`h-3 w-3 rounded-full ${
                     booking.isPaid ? "bg-green-500" : "bg-red-500"
                   }`}
-                ></div>
+                />
                 <p
                   className={`text-sm ${
                     booking.isPaid ? "text-green-500" : "text-red-500"

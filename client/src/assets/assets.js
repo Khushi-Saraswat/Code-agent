@@ -174,8 +174,8 @@ export const roomCommonData = [
 // User Dummy Data
 export const userDummyData = {
   _id: "user_2unqyL4diJFP1E3pIBnasc7w8hP",
-  username: "Great Stack",
-  email: "user.greatstack@gmail.com",
+  username: "Abdul Ali",
+  email: "ali@gmail.com",
   image:
     "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ2N2c5YVpSSEFVYVUxbmVYZ2JkSVVuWnFzWSJ9",
   role: "hotelOwner",
@@ -314,6 +314,12 @@ export const navLinks = [
   { name: "Hotels", path: "/rooms" },
   { name: "Experience", path: "/" },
   { name: "About", path: "/" },
+];
+
+export const sidebarLinks = [
+  { name: "Dashboard", path: "/owner", icon: assets.dashboardIcon },
+  { name: "Add Room", path: "/owner/add-room", icon: assets.addIcon },
+  { name: "List Room", path: "/owner/list-room", icon: assets.listIcon },
 ];
 
 export const roomTypes = [
