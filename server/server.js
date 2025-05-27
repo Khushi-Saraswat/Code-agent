@@ -16,7 +16,12 @@ app.use(express.json());
 app.use(clerkMiddleware());
 
 // clerk webhook api
-app.use("/api/clerk", clerkWebhooks);
+app.post(
+  "/api/clerk",
+  bodyParser.raw({ type: "*/*" }), // <-- Important for verifying signature
+  clerkWebhooks
+);
+// app.use("/api/clerk", clerkWebhooks);
 
 app.get("/", (req, res) => res.send("API is working fine"));
 
