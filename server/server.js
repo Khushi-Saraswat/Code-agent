@@ -26,12 +26,14 @@
 
 import express from "express";
 import cors from "cors";
-import "dotenv/config";
 import bodyParser from "body-parser";
 import connectDB from "./configs/db.js";
 
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
+
+import dotenv from "dotenv";
+dotenv.config();
 
 // Connect to MongoDB
 connectDB();
