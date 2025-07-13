@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Category } from "@/payload-types";
 import useDropDownPosition from "../hooks/use-dropdown-position";
 import SubcategoryMenu from "./SubcategoryMenu";
+import Link from "next/link";
 
 interface Props {
   category: Category;
@@ -27,12 +28,17 @@ const CategoryDropdown = ({ category, isActive, isNavigationHovered }: any) => {
 
   const dropdownPosition = getDropwDownPosition;
 
+  // const toggleDropdown = () => {
+  //   if (category.subcategories?.docs?.length) setIsOpen(!isOpen);
+  // };
+
   return (
     <div
       className="relative"
       ref={dropdownRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      // onClick={toggleDropdown}
     >
       <div className="relative">
         <Button
@@ -44,7 +50,9 @@ const CategoryDropdown = ({ category, isActive, isNavigationHovered }: any) => {
               "bg-white border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[4px] -translate-y-[4px]"
           )}
         >
-          {category.name}
+          <Link href={`/${category.slug === "all" ? "" : category.slug}`}>
+            {category.name}
+          </Link>
         </Button>
 
         {/* subcategories dropdown */}

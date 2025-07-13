@@ -3,12 +3,6 @@ import { ca } from "date-fns/locale";
 import Link from "next/link";
 import React from "react";
 
-interface Props {
-  category: any;
-  isOpen: boolean;
-  position: { top: any; left: any };
-}
-
 const SubcategoryMenu = ({ category, isOpen, position }: any) => {
   if (
     !isOpen ||
@@ -36,7 +30,7 @@ const SubcategoryMenu = ({ category, isOpen, position }: any) => {
           {category.subcategories?.map((subCategory: Category) => (
             <Link
               key={subCategory.slug}
-              href="/"
+              href={`/${category.slug}/${subCategory.slug}`}
               className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center justify-between underline font-medium"
             >
               {subCategory.name}
