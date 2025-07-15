@@ -1,9 +1,17 @@
+import React from "react";
 import prism from "prismjs";
 import Editor from "react-simple-code-editor";
 import { FaCopy } from "react-icons/fa";
 
-const LeftPanel = ({ code, setCode, reviewCode, loading }) => {
-  const copyToClipboard = (text) => {
+interface LeftPanelProps {
+  code: string;
+  setCode: (code: string) => void;
+  reviewCode: () => void;
+  loading: boolean;
+}
+
+const LeftPanel = ({ code, setCode, reviewCode, loading }: LeftPanelProps) => {
+  const copyToClipboard = (text: any) => {
     navigator.clipboard.writeText(text).then(
       () => {
         alert("Code copied to clipboard!");
@@ -28,8 +36,8 @@ const LeftPanel = ({ code, setCode, reviewCode, loading }) => {
       <div className="flex-1 overflow-auto p-4">
         <Editor
           value={code}
-          onValueChange={(code) => setCode(code)}
-          highlight={(code) =>
+          onValueChange={(code: string) => setCode(code)}
+          highlight={(code: string) =>
             prism.highlight(code, prism.languages.javascript, "javascript")
           }
           padding={16}
@@ -48,9 +56,9 @@ const LeftPanel = ({ code, setCode, reviewCode, loading }) => {
             loading ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >
-          {loading ? (
-            <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-          ) : null}
+          {loading && (
+            <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+          )}
           {loading ? "Reviewing..." : "Review Code"}
         </button>
       </div>

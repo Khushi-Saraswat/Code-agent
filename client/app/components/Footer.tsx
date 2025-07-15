@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
-import { FaSquareFacebook } from "react-icons/fa6";
 import { footerData } from "../constant/data";
 
 const Footer = () => {

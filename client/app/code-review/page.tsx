@@ -13,22 +13,24 @@ import LeftPanel from "../components/LeftPanel";
 import Footer from "../components/Footer";
 import { backendURL } from "../constant/data";
 
-const CodeReview = () => {
-  const [code, setCode] = useState(`function sum() {
+const CodeReview: React.FC = () => {
+  const [code, setCode] = useState<string>(`function sum() {
   return a + b;
 }`);
-  const [finalCode, setFinalCode] = useState(``);
-  const [loading, setLoading] = useState(false);
+  const [finalCode, setFinalCode] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const reviewCode = async () => {
+  const reviewCode = async (): Promise<void> => {
     setLoading(true);
     try {
-      const res = await axios.post(`${backendURL}`, {
+      const res = await axios.post<{ data: string }>(`${backendURL}`, {
         code,
       });
-      setFinalCode(res.data);
+
+      // If your backend sends raw string directly:
+      setFinalCode(typeof res.data === "string" ? res.data : res.data.data);
     } catch (error) {
-      console.error(error);
+      console.error("Code review error:", error);
     } finally {
       setLoading(false);
     }

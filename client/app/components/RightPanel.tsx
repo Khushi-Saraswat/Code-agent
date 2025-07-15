@@ -1,10 +1,17 @@
+import React from "react";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
+
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-javascript";
 import "highlight.js/styles/github-dark.css";
 
-const RightPanel = ({ finalCode, loading }) => {
+interface RightPanelProps {
+  finalCode: string;
+  loading: boolean;
+}
+
+const RightPanel: React.FC<RightPanelProps> = ({ finalCode, loading }) => {
   return (
     <section className="w-full md:w-1/2 flex flex-col bg-gray-900 rounded-xl shadow-lg">
       <header className="text-lg font-semibold p-4 border-b border-gray-800 bg-gray-800">
