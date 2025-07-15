@@ -37,10 +37,7 @@ const app = express();
 const PORT = process.env.PORT || "5000";
 
 // Only allow these origins
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://your-frontend-domain.com",
-];
+const allowedOrigins = ["http://localhost:3000", process.env.CLIENT_URL];
 
 const corsOptions = {
   origin: allowedOrigins,
