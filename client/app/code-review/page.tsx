@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import prism from "prismjs";
 import axios from "axios";
@@ -34,7 +36,7 @@ const CodeReview = () => {
 
   useEffect(() => {
     prism.highlightAll();
-  }, []);
+  }, [finalCode]);
 
   return (
     <main className="min-h-screen flex flex-col bg-gray-950 text-white">

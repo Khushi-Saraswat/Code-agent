@@ -1,13 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html,
+body {
+  font-family: var(--font-jetbrains);
 }
-
 /* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px; /* Width of the scrollbar */

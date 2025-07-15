@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
-import { homeData } from "../constant/data";
+import Link from "next/link";
+import Footer from "./components/Footer";
+import { homeData } from "./constant/data";
 
 const Home = () => {
   return (
@@ -28,7 +28,7 @@ const Home = () => {
           {homeData?.map((feature, index) => (
             <div
               key={index}
-              className="group bg-gray-800 bg-opacity-70 backdrop-blur-lg p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none hover:ring-2 focus:ring-blue-500 cursor-pointer"
+              className="group bg-gray-800 bg-opacity-70 backdrop-blur-lg p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 focus:outline-none hover:ring focus:ring-blue-500 cursor-pointer"
               tabIndex={0}
               aria-label={`Feature: ${feature.title}`}
             >
@@ -48,7 +48,7 @@ const Home = () => {
 
       <section className="text-center mb-16 z-10">
         <Link
-          to="/code-review"
+          href="/code-review"
           className="inline-block bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 hover:from-blue-600 hover:via-purple-700 hover:to-pink-700 text-white font-semibold text-lg py-3.5 px-8 sm:px-12 rounded-full transition-all duration-300 transform hover:scale-110 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
           aria-label="Start using AI Code Reviewer"
         >
