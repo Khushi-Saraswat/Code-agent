@@ -21,4 +21,4 @@ export const homeData = [
   },
 ];
 
-export const backendURL = "http://localhost:5000/ai/code-review";
+export const backendURL = "https://ai-code-reviewer-seven-pearl.vercel.app";
