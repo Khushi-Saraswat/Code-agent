@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ai_code_review_agent.Service.CodeReviewService;
-import com.example.ai_code_review_agent.dto.Request.CodeReviewRequest;
 import com.example.ai_code_review_agent.dto.Response.CodeReviewResponse;
 import com.example.ai_code_review_agent.dto.Response.ReviewHistoryDTO;
 

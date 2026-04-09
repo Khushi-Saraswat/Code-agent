@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,7 +42,7 @@ public class CodeSubmission {
     private LocalDateTime submittedAt;
 
 
-    @OneToOne(mappedBy = "codeSubmission")
+    @OneToOne(mappedBy = "submission")
     private ReviewSession reviewSession;
 
 }

@@ -1,131 +1,48 @@
 package com.example.ai_code_review_agent.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.ai_code_review_agent.Model.CodeSubmission;
 import com.example.ai_code_review_agent.dto.Request.CodeReviewRequest;
 import com.example.ai_code_review_agent.dto.Response.CodeReviewResponse;
 import com.example.ai_code_review_agent.dto.Response.ReviewHistoryDTO;
+import com.example.ai_code_review_agent.repository.CodeSubmissionRepository;
 
 @Service
 public class CodeReviewService {
+
+  @Autowired
+  private CodeSubmissionRepository codeSubmissionRepository;
+
     
 // 1. accept DTO 2.validate code 3.create submission 4.generate dummy findings 5.calculate score
 
       public CodeReviewResponse review(CodeReviewRequest codeReviewRequest){
+
+        //validate code
+        if(codeReviewRequest.getCode() == null || codeReviewRequest.getCode().isEmpty()) {
+            // Handle invalid code input
+            throw new IllegalArgumentException("Code cannot be null or empty");
+        }
+        //create submission
+        CodeSubmission submission = new CodeSubmission();
+        submission.setCode(codeReviewRequest.getCode());
+        submission.setLanguage(codeReviewRequest.getLanguage());
+        submission.setUserNotes(codeReviewRequest.getUserNotes());
+        submission.setSubmittedAt(LocalDateTime.now());
+
+        CodeSubmission savedSubmission = codeSubmissionRepository.save(submission);
         
-     /*This method will perform 7 steps.
+        //generate dummy findings-score summary findings etc... using python script or any other logic
+         
+      
+          
 
-     Step 1 — Receive Request
 
-     Input:
-
-     code
-     language
-     filename
-     notes
-
-    First validate:
-
-    code not null
-    language not null
-    Step 2 — Save CodeSubmission
-
-    Create CodeSubmission entity:
-
-    Set:
-
-     code
-     language
-    filename
-    userNotes
-    submittedAt
-
-    Save to DB.
-
-    Now you get:
-    submissionId
-
-     You will need this later.
-
-     Step 3 — Call AI / Dummy Analyzer
-
-     For now do dummy logic.
-
-      Example logic:
-
-     if code contains "null" → add bug
-     if code contains "System.out" → style issue
-    else → no issue
-
-     Create list of ReviewFinding (NOT DB entity yet)
-
-      This simulates AI.
-
-     Later:
-     This step will call Python.
-
-      Step 4 — Calculate Score
-
-      Start score = 100
-
-      Loop findings:
-
-    CRITICAL → -20
-       MAJOR → -10
-     MINOR → -5
-
-      Final score computed.
-
-    Step 5 — Save ReviewSession
-
-    Create ReviewSession entity:
-
-     Set:
-
-    submissionId
-     score
-    totalFindings
-   summary
-   reviewedAt
-
-    Save it.
-
-   Now you get:
-   sessionId
-
-     Step 6 — Save ReviewFindings
-
-    Loop findings list
-
-    For each finding:
-    Create ReviewFinding entity
-
-     Set:
-
-     sessionId
-     type
-      severity
-      message
-     lineNumber
-     suggestion
-
-      Save each.
-
-      Step 7 — Build Response DTO
-
-      Create response:
-
-      Set:
-
-    submissionId
-     score
-      summary
-     findings list
-       createdAt
-
-       Return response. */
         return null;
       }
 
