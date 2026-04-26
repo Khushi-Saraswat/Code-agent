@@ -7,8 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,27 +21,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "code_submissions")
 public class CodeSubmission {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String code;
-
     private String language;
 
-    private String filename;
+    @Column(columnDefinition = "TEXT")
+    private String codeContent;
 
-    @Column(length = 1000)
-    private String userNotes;
-
+    private Integer tokenCount;
     private LocalDateTime submittedAt;
-
-
-    @OneToOne(mappedBy = "submission")
-    private ReviewSession reviewSession;
 
 }

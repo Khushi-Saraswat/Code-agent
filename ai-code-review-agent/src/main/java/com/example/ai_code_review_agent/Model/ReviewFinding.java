@@ -1,9 +1,11 @@
 package com.example.ai_code_review_agent.Model;
 
-import jakarta.persistence.*;
-import lombok.*;
 import com.example.ai_code_review_agent.dto.Enum.Severity;
 import com.example.ai_code_review_agent.dto.Enum.Type;
+
+import jakarta.persistence.*;
+import lombok.*;
+
 
 @Entity
 @Getter
@@ -11,28 +13,24 @@ import com.example.ai_code_review_agent.dto.Enum.Type;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "review_findings")
 public class ReviewFinding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // The redundant sessionId field has been removed 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id")
+    private ReviewSession session;
 
-    @Enumerated(EnumType.STRING) // Recommended to ensure Enums are stored as Strings in DB
-    private Type type;       
+    private Type category;   // Bug, Security, Style, Performance
+    private Severity severity;   // Critical, Major, Minor, Info
+    private Integer lineStart;
+    private Integer lineEnd;
 
-    @Enumerated(EnumType.STRING)
-    private Severity severity;   
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-    @Column(length = 2000)
-    private String message;
-
-    private Integer lineNumber;
-
-    @Column(length = 2000)
-    private String suggestion;
-
-    @ManyToOne
-    @JoinColumn(name = "session_id") // This now safely creates/uses the session_id column
-    private ReviewSession reviewSession;
+    @Column(columnDefinition = "TEXT")
+    private String suggestedFix;
 }
