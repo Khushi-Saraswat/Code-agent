@@ -10,6 +10,8 @@ public class ReviewHistoryDTO {
 
     private Long submissionId;
 
+    private String language;
+
     private Integer score;
 
     private String summary;

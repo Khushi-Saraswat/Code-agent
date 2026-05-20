@@ -1,45 +1,50 @@
 package com.example.ai_code_review_agent.Service;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import com.example.ai_code_review_agent.dto.Request.ReviewFindingDTO;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.example.ai_code_review_agent.dto.Request.AIReviewResponseDTO;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewParserService {
 
+    public final ObjectMapper objectMapper;
 
-   public final ObjectMapper objectMapper;
+    public AIReviewResponseDTO parse(String aiResponse) {
+        try {
+            // 1. Clean the response (Removing markdown backticks)
+            String cleanJson = aiResponse.replaceAll("(?s)```json(.*?)```", "$1")
+                                         .replaceAll("```", "")
+                                         .trim();
 
-   public List<ReviewFindingDTO> parse(String aiResponse){
+            log.info("Cleaning JSON for parsing...");
 
-      try {
-            String json = extractJson(aiResponse);
-            return objectMapper.readValue(json,
-                new TypeReference<List<ReviewFindingDTO>>() {});
+            // 2. Pre-process to fix the "Summary is Object" error
+            JsonNode rootNode = objectMapper.readTree(cleanJson);
+            JsonNode reportNode = rootNode.get("reviewReport");
+
+            if (reportNode != null && reportNode.has("summary")) {
+                JsonNode summaryNode = reportNode.get("summary");
+                
+                // Agar summary ek object hai (jo error de raha hai), use String bana do
+                if (summaryNode.isObject()) {
+                    log.warn("AI sent summary as an object. Converting to string to prevent crash.");
+                    ((ObjectNode) reportNode).put("summary", summaryNode.toString());
+                }
+            }
+
+            // 3. Now safely convert to DTO
+            return objectMapper.treeToValue(rootNode, AIReviewResponseDTO.class);
+
         } catch (Exception e) {
-            return Collections.emptyList();
+            log.error("CRITICAL: Parse failed! Raw response was: {}", aiResponse);
+            log.error("Error Detail: {}", e.getMessage());
+            return null;
         }
-
-
-
-   }
-
-
-
-     private String extractJson(String raw) {
-        int start = raw.indexOf('[');
-        int end   = raw.lastIndexOf(']');
-        if (start == -1 || end == -1)
-            throw new RuntimeException("No JSON array found");
-        return raw.substring(start, end + 1);
     }
-    
 }

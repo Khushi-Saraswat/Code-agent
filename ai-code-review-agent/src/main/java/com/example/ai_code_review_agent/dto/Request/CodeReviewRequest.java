@@ -10,8 +10,5 @@ public class CodeReviewRequest {
     @NotBlank(message = "Code cannot be empty")
     private String code;
 
-    @NotBlank(message = "Language cannot be empty")
-    private String language;
-
 
 }

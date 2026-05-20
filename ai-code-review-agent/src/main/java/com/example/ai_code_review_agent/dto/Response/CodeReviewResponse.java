@@ -2,8 +2,8 @@ package com.example.ai_code_review_agent.dto.Response;
 import java.time.LocalDateTime;
 import java.util.List;
 import com.example.ai_code_review_agent.dto.Request.ReviewFindingDTO;
-
 import lombok.Data;
+
 
 @Data
 public class CodeReviewResponse {

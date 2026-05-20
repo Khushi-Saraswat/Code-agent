@@ -1,9 +1,10 @@
 package com.example.ai_code_review_agent.Model;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,35 +13,39 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @Entity
-@Getter
-@Setter
+@Table(name = "educational_resources")
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Table(name = "code_submissions")
-public class CodeSubmission {
+public class EducationalResource {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String language;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id")
+    @JsonIgnore
+    private ReviewSession session;
 
+    // "Express.js Security Best Practices"
+    private String topic;
+
+    // "OWASP Node.js Security Cheat Sheet"
+    private String title;
+
+    // "https://..."
     @Column(columnDefinition = "TEXT")
-    private String codeContent;
+    private String url;
 
-    private Integer tokenCount;
-    private LocalDateTime submittedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id") // This creates the foreign key column in DB
-     private User user;
+
 
 
 }

@@ -1,7 +1,5 @@
 package com.example.ai_code_review_agent.Model;
-
-import com.example.ai_code_review_agent.dto.Enum.Severity;
-import com.example.ai_code_review_agent.dto.Enum.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,21 +8,26 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "review_findings")
 public class ReviewFinding {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id")
+    @JsonIgnore
     private ReviewSession session;
 
-    private Type category;   // Bug, Security, Style, Performance
-    private Severity severity;   // Critical, Major, Minor, Info
+    // ← AI "type" bhejta hai
+    // "Syntax Error","Logical Error","Security Vulnerability" etc
+    private String type;
+
+    private String severity; // Critical, Major, Minor
     private Integer lineStart;
     private Integer lineEnd;
 
@@ -33,4 +36,6 @@ public class ReviewFinding {
 
     @Column(columnDefinition = "TEXT")
     private String suggestedFix;
+
+
 }
