@@ -8,20 +8,22 @@ const Footer = () => {
   const router = useRouter();
 
   return (
-    <footer className="w-full bg-gray-800 text-white px-6 py-4 mt-auto">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-        {/* Logo */}
-        <div onClick={() => router.push("/")} className="cursor-pointer">
-          <img src="/logo.png" alt="logo" className="h-10 w-auto" />
+    <footer className="relative z-10 w-full border-t border-white/10 bg-slate-950/80 px-6 py-5 text-white backdrop-blur">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-sm md:flex-row">
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          className="rounded-md transition hover:opacity-85"
+          aria-label="Go to home page"
+        >
+          <img src="/logo.png" alt="AI Code Reviewer logo" className="h-10 w-auto" />
+        </button>
+
+        <div className="text-center text-slate-400">
+          © 2026 All Rights Reserved - Developed by{" "}
+          <span className="text-white">Khushi Saraswat</span>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center text-gray-400">
-          © 2025 All Rights Reserved — Developed by{" "}
-          <span className="text-white">Abdul Ali</span>
-        </div>
-
-        {/* Social Icons */}
         <div className="flex gap-4 text-lg">
           {footerData?.map((item, i) => (
             <Link
@@ -29,7 +31,7 @@ const Footer = () => {
               href={item.to}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-400 transition"
+              className="text-slate-300 transition hover:text-cyan-300"
             >
               {item.icon}
             </Link>

@@ -9,7 +9,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Code Reviewer – Instant Code Feedback with AI",
+  title: "AI Code Reviewer - Instant Code Feedback with AI",
   description:
     "Get instant, intelligent code reviews powered by AI. Analyze your code for bugs, improvements, and best practices in real-time.",
   icons: {

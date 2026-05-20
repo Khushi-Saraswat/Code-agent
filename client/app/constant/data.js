@@ -1,47 +1,38 @@
-import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
-import { FaSquareFacebook } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FiActivity, FiCpu, FiGlobe, FiRefreshCw } from "react-icons/fi";
 
 export const homeData = [
   {
     title: "Intelligent Analysis",
     description: "Advanced AI delivers precise, context-aware code reviews.",
-    icon: "🧠",
+    icon: <FiCpu />,
   },
   {
     title: "Real-Time Insights",
     description: "Instant, actionable feedback to elevate your code.",
-    icon: "⚡",
+    icon: <FiActivity />,
   },
   {
     title: "Broad Language Support",
     description: "Compatible with all major programming languages.",
-    icon: "🌐",
+    icon: <FiGlobe />,
   },
   {
     title: "Seamless Integration",
     description: "Effortlessly fits into your development pipeline.",
-    icon: "🔄",
+    icon: <FiRefreshCw />,
   },
 ];
 
-export const backendURL =
-  "https://ai-code-reviewer-seven-pearl.vercel.app/ai/code-review";
+export const backendURL = "http://localhost:8080/api/review/submit";
 
 export const footerData = [
   {
-    to: "https://facebook.com/abdulalisoomro2k23",
-    icon: <FaSquareFacebook />,
-  },
-  {
-    to: "https://github.com/developer-abdulali",
+    to: "https://github.com/Khushi-Saraswat",
     icon: <FaGithub />,
   },
   {
-    to: "https://linkedin.com/in/abdulali12",
+    to: "https://www.linkedin.com/in/khushi-saraswat1/",
     icon: <FaLinkedin />,
-  },
-  {
-    to: "https://abdulali.vercel.app",
-    icon: <FaUserCircle />,
   },
 ];

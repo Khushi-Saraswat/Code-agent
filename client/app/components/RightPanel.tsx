@@ -1,43 +1,58 @@
+"use client"
+
 import React from "react";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
-
-import "prismjs/themes/prism-tomorrow.css";
-import "prismjs/components/prism-javascript";
+import ReviewViewer from "./ReviewViewer";
 import "highlight.js/styles/github-dark.css";
 
 interface RightPanelProps {
   finalCode: string;
+  reviewJson: any;
+  repoTree?: any[];
+  githubOwner?: string;
+  githubRepo?: string;
+  githubBranch?: string;
+  selectedFilePath?: string;
+  error: string | null;
   loading: boolean;
 }
 
-const RightPanel: React.FC<RightPanelProps> = ({ finalCode, loading }) => {
+const RightPanel = ({
+  finalCode,
+  reviewJson,
+  selectedFilePath,
+  error,
+  loading,
+}: RightPanelProps): React.JSX.Element => {
   return (
-    <section className="w-full md:w-1/2 flex flex-col bg-gray-900 rounded-xl shadow-lg">
-      <header className="text-lg font-semibold p-4 border-b border-gray-800 bg-gray-800">
-        Code Review
+    <section className="flex min-h-[520px] flex-1 flex-col overflow-hidden rounded-lg border border-gray-800 bg-gray-900 shadow-lg lg:min-h-0">
+      <header className="flex-shrink-0 border-b border-gray-800 bg-gray-800/50 p-3 text-base font-bold text-blue-400 sm:p-4 sm:text-lg">
+        AI AUDIT REPORT
       </header>
-      <div
-        className="flex-1 overflow-y-auto p-4 prose prose-invert max-w-none"
-        style={{ maxHeight: "calc(100vh - 200px)" }}
-      >
+      <div className="custom-scrollbar flex-1 overflow-y-auto p-3 sm:p-4">
         {loading ? (
-          <div className="flex items-center justify-center h-full text-white">
-            <div className="flex flex-col items-center">
-              <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin mb-3"></div>
-              <p className="text-sm text-gray-300">Generating review...</p>
-            </div>
+          <div className="flex flex-col items-center justify-center h-full">
+            <div className="h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="mt-4 text-gray-400 animate-pulse font-mono text-sm">Analyzing Vulnerabilities...</p>
           </div>
+        ) : error ? (
+          <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-lg text-red-200 text-sm">
+            <strong>System Error:</strong> {error}
+          </div>
+        ) : reviewJson ? (
+          <ReviewViewer data={reviewJson} sourceName={selectedFilePath} />
         ) : finalCode ? (
           <Markdown rehypePlugins={[rehypeHighlight]}>{finalCode}</Markdown>
         ) : (
-          <p className="text-gray-400 italic">
-            Your AI review will appear here.
-          </p>
+          <div className="h-full flex items-center justify-center text-gray-600 italic text-sm">
+            Enter code and click review to start audit, or load a GitHub repository tree.
+          </div>
         )}
       </div>
     </section>
   );
 };
+
 
 export default RightPanel;
