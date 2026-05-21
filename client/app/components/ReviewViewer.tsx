@@ -34,7 +34,7 @@ const ReviewViewer = ({ data, sourceName }: ReviewViewerProps): React.JSX.Elemen
     URL.revokeObjectURL(url);
   };
 
-  if (!report) return null;
+  if (!report) return <></>;
 
   return (
     <div className="animate-in fade-in space-y-6 duration-500">
