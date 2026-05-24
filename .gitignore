@@ -1,0 +1,44 @@
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+*.local
+
+# Environment files
+.env
+.env.*.local
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Dependency directories
+client/node_modules/
+backend/node_modules/
+
+# Build output
+client/.next/
+client/out/
+client/build/
+
+backend/dist/
+backend/build/
+
+# Coverage / Testing
+coverage/
+
+# Misc
+*.swp
+*.swo
