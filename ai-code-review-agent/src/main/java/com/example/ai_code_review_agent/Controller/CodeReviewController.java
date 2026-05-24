@@ -1,7 +1,5 @@
 package com.example.ai_code_review_agent.Controller;
 
-import java.util.Map;
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
