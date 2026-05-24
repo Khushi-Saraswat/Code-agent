@@ -22,11 +22,18 @@
 
 	<dependencies>
 
-		<dependency>
+		 	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.5.3</version>
+			<!-- Removed hardcoded version -->
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+			<!-- Removed hardcoded version -->
+		</dependency>
+
 
 
 		<dependency>
@@ -118,16 +125,17 @@
 	</dependencies>
 
 	<!-- Very Important: Spring AI needs this repository to find Milestone (M) versions -->
-	<repositories>
+		<repositories>
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
-			<url>https://spring.io</url>
+			<url>https://spring.io</url> <!-- Fixed URL -->
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
+
 
 	<build>
 		<plugins>

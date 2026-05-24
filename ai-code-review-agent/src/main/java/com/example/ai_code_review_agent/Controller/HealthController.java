@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.ai_code_review_agent.Service.GitService;
+import lombok.extern.slf4j.Slf4j;
 
-
-
+@Slf4j
 @RestController
 @RequestMapping("/api/health")
 public class HealthController {
@@ -37,18 +36,14 @@ public class HealthController {
         @PathVariable String owner, @PathVariable String repo,
         @RequestHeader(value = "X-GitHub-Token", required = false) String githubToken,
         @PathVariable String branch) {
-
-        System.out.println("🔍 Incoming Request: GET /api/health/repo-details");
-        System.out.println("📍 Path: " + owner + "/" + repo + " [" + branch + "]");
-        System.out.println("🔑 GitHub Token Present: " + (githubToken != null && !githubToken.isBlank()));
-        System.out.println("🌐 Header Info: " + (githubToken != null ? "Request contains X-GitHub-Token" : "No GitHub Token"));
+        
+        log.info("Incoming Request: GET /api/health/repo-details for {}/{} [{}]", owner, repo, branch);
 
         try {
             List<Map<String, Object>> treeList = gitService.getRepositoryDetails(owner, repo, githubToken, branch);
             return ResponseEntity.ok(treeList);
         } catch (Exception e) {
-            System.err.println("❌ Error fetching repository details: " + e.getMessage());
-            e.printStackTrace();
+            log.error("Error fetching repository details: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Collections.singletonMap("error", e.getMessage()));
         }

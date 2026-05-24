@@ -26,10 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/review")
 public class CodeReviewController {
+    
+    private final CodeReviewService codeReviewService;
 
-     
     @Autowired
-    private CodeReviewService codeReviewService;
+    public CodeReviewController(CodeReviewService codeReviewService) {
+        this.codeReviewService = codeReviewService;
+    }
 
     @PostMapping("/submit")
     public ResponseEntity<String> submit(
@@ -41,7 +44,7 @@ public class CodeReviewController {
         
         // Pass the 'user' object to your service so the review can be saved to their account
         String review = codeReviewService.review(req, user);
-        System.out.println(review + " session output");
+        log.debug("Review session output: {}", review);
         
         // 3. Return JSON structure matching frontend requirements
         return ResponseEntity.ok(review);
